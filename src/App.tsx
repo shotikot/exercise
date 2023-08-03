@@ -1,5 +1,5 @@
-import React from "react";
 import { MainScreen } from "screens";
+
 import "./App.css";
 
 function App() {

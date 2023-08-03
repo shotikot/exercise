@@ -1,5 +1,4 @@
 import { Autocomplete } from "components";
-import React from "react";
 import { searchUsers } from "services";
 
 export function MainScreen() {

@@ -1,5 +1,6 @@
 1. In React, a regular component (React.Component) re-renders whenever its state or props change. In contrast, a React.PureComponent optimizes rendering by performing a shallow comparison of new and old props and state. If they have the same references, re-rendering is avoided. This boosts performance but requires caution with complex data to avoid potential bugs.
 
+```
 class SampleComponent extends React.PureComponent {
   render() {
     return <div>{this.props.data.name}</div>;
@@ -13,6 +14,7 @@ const data = { name: 'Johnny Sack' };
 // and then later
 data.name = 'Jane Doe'; // mutate data object directly
 <SampleComponent data={data} /> // MyComponent will NOT re-render, as data object reference hasn't changed, despite the name property having changed
+```
 
 2. When a component that consumes context data implements shouldComponentUpdate, it may prevent re-renders even if the context data has changed. This is because shouldComponentUpdate only checks for changes in props and state, but context changes are not included in these checks.
 

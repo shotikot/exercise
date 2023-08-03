@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { IAutocompleteProps } from "./autocomplete.types";
-import styles from "./autocomplete.module.scss";
+import "./autocomplete.css";
 
 export function Autocomplete<T>({
   fetchOptions,
@@ -36,7 +36,7 @@ export function Autocomplete<T>({
 
     const newDebounceTimer = setTimeout(() => {
       fetchSearchResults(value);
-    }, 300); // 
+    }, 300);
 
     setDebounceTimer(newDebounceTimer);
   };
@@ -44,11 +44,29 @@ export function Autocomplete<T>({
   const handleSelectOption = (item: T) => {
     setQuery(displayOption(item));
     setOptions([]);
-    onSelect(item);
+    onSelect && onSelect(item);
+  };
+
+  const highlightMatch = (item: T) => {
+    const itemStr = displayOption(item);
+    const matchIndex = itemStr.toLowerCase().indexOf(query.toLowerCase());
+    if (matchIndex === -1) {
+      return <span>{itemStr}</span>;
+    }
+    const beforeMatch = itemStr.slice(0, matchIndex);
+    const match = itemStr.slice(matchIndex, matchIndex + query.length);
+    const afterMatch = itemStr.slice(matchIndex + query.length);
+    return (
+      <span>
+        {beforeMatch}
+        <span className="matchingText">{match}</span>
+        {afterMatch}
+      </span>
+    );
   };
 
   return (
-    <div className={styles.autocompleteContainer}>
+    <div className="autocompleteContainer">
       <input
         type="text"
         value={query}
@@ -57,12 +75,12 @@ export function Autocomplete<T>({
         autoComplete="off"
       />
       {isLoading ? (
-        <div className={styles.isLoadingMessage}>Loading...</div>
+        <div className="isLoadingMessage">Loading...</div>
       ) : (
         <ul>
           {options.map((item, index) => (
             <li key={index} onClick={() => handleSelectOption(item)}>
-              {displayOption(item)}
+              {highlightMatch(item)}
             </li>
           ))}
         </ul>

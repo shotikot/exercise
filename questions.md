@@ -38,21 +38,17 @@ Styling HOC: A higher-order component that adds specific styles or CSS classes t
 
 7. setState takes two arguments: the updated state object or function, and an optional callback function. setState is asynchronous for performance optimization.
 
-8. Remove Lifecycle Methods: In a function component, there are no lifecycle methods like componentDidMount, componentDidUpdate, etc. You need to convert the logic inside these methods to React Hooks or handle it differently using other methods.
-
-Remove this References: In function components, you don't use this to access props or state. Instead, you directly use the prop or state variable.
+8. Remove Lifecycle Methods: 
 
 Convert State to useState Hook: If your class component uses state, you'll need to replace it with the useState hook to manage the component's state.
 
-Replace Class Component with Function Component: Create a new function component and paste the logic from the class component into the function component.
+Replace Class Component with Function Component
 
-Convert Event Handlers: If you have event handlers defined as class methods, update them to regular functions and handle them with React Hooks like useState, useEffect, or useCallback.
+Update Render Method
 
-Update Render Method: In function components, you don't have a render method. The return value of the function will be the component's JSX to be rendered.
+Remove Constructor
 
-Remove Constructor: Remove the constructor from your class component since you don't need it in function components.
-
-Refactor Lifecycle Hooks: Convert any other lifecycle hooks you might be using (e.g., componentWillUnmount, getDerivedStateFromProps, etc.) to equivalent React Hooks or functional logic.
+Refactor Lifecycle Hooks
 
 Migrate Context and Refs: If your class component uses Context API or Refs, you'll need to update them using their respective hooks (useContext and useRef).
 
